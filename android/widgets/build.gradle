@@ -24,12 +24,12 @@ def computeBuildToolsVersion() {
     }
 }
 
-def computeSupportVersion() {
-    if(project.hasProperty("supportVersion")) {
-        return supportVersion
+def computeAndroidXVersion() {
+    if(project.hasProperty("androidxVersion")) {
+        return androidxVersion
     }
     else {
-        return "28.0.0"
+        return "1.0.0"
     }
 }
 
@@ -61,8 +61,10 @@ android {
 }
 
 dependencies {
+    def androidxVersion = computeAndroidXVersion()
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:support-v4:' + computeSupportVersion()
+    implementation 'androidx.viewpager:viewpager:' + androidxVersion
+    implementation 'androidx.fragment:fragment:' + androidxVersion
 }
 
 task cleanBuildDir (type: Delete) {
